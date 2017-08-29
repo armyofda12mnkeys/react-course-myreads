@@ -37,11 +37,31 @@ body, .app {
 }
 
 .bookshelf-title {
-  border-bottom: 1px solid #dedede;
+	border-bottom: 2px solid #ccc;
 }
 .bookshelf-books {
   text-align: center;
+	list-style-type: none;
+	clear: both;
 }
+/*
+.bookshelf-books:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.bookshelf-book {
+	position: relative;
+	float: left;
+	padding: 0px 20px;
+}
+.bookshelf-book:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+*/
 
 .open-search {
   position: fixed;
@@ -61,6 +81,8 @@ body, .app {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   font-size: 0;
 }
+
+
 
 /* search page */
 
@@ -120,14 +142,20 @@ body, .app {
 }
 
 .book {
+	position: relative;
   width: 140px;
 }
 .book-title,
 .book-authors {
   font-size: 0.8em;
 }
+.book-image img{
+	border: 3px solid #ccc;
+}
+
 .book-title {
   margin-top: 10px;
+	font-weight: bold;	
 }
 .book-authors {
   color: #999;
