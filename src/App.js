@@ -38,13 +38,14 @@ class App extends Component {
 
 		BooksAPI.update(book, shelf).then( () => {
 				console.log(`book added to ${shelf}`);
+				
+				BooksAPI.getAll().then( (books) => {
+					console.log(books);
+					console.log(books.map( (book, index, array) => {return {title: book.title, status: book.shelf};}) );
+					this.setState({mybooks: books});
+				});		
 			}
 		);
-		BooksAPI.getAll().then( (books) => {
-			console.log(books);
-			console.log(books.map( (book, index, array) => {return {title: book.title, status: book.shelf};}) );
-			this.setState({mybooks: books});
-		});		
 	};
 	
 	/*

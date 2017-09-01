@@ -149,8 +149,13 @@ body, .app {
 .book-authors {
   font-size: 0.8em;
 }
+.book-image {
+	position: relative;
+}
 .book-image img{
 	border: 3px solid #ccc;
+	height: 180px;
+	width: 120px
 }
 
 .book-title {
@@ -171,7 +176,7 @@ body, .app {
 .book-shelf-changer {
   position: absolute;
   right: 0;
-  bottom: -10px;
+  bottom: -10px; /*looks more consistant on top-right vs bottom-right because image size changes */
   width: 40px;
   height: 40px;
   border-radius: 50%;
