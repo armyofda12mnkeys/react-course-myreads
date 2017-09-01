@@ -38,7 +38,7 @@ class App extends Component {
 					//console.log(books);
 					//console.log(books.map( (book, index, array) => {return {title: book.title, status: book.shelf};}) );
 					this.setState({mybooks: books});
-					book.shelf = shelf;
+					//book.shelf = shelf;
 				}).catch(function(error) {
 				  //console.log('There has been a problem with your fetch operation: ' + error.message);
 				});
