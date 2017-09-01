@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class CurrentlyReading extends Component {
 
   render() {
-		const books = this.props.books || [];		
+		const books = this.props.books || [];
 		const updateBookShelf = this.props.updateBookShelf;
 		
 		//console.log('Props', this.props);
@@ -27,7 +27,7 @@ class CurrentlyReading extends Component {
 						</div>
 						<div className="book-title">{book.title}</div>
 						<div className="book-authors">{book.authors.join(', ')}</div>
-						{/*<div className="book-shelf">{book.shelf}</div>*/}						
+						{/*<div className="book-shelf">{book.shelf}</div>*/}
 					</li>
 				))}
 				</ul>

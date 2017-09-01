@@ -43,7 +43,7 @@ class App extends Component {
 					console.log(books);
 					console.log(books.map( (book, index, array) => {return {title: book.title, status: book.shelf};}) );
 					this.setState({mybooks: books});
-				});		
+				});
 			}
 		);
 	};
@@ -64,7 +64,7 @@ class App extends Component {
     return (
       <div className="app">	  
 				<Route exact path="/" render={ () => (
-					<ListMyBooks mybooks={this.state.mybooks} updateBookShelf={this.updateBookShelf} />					
+					<ListMyBooks mybooks={this.state.mybooks} updateBookShelf={this.updateBookShelf} />	
 				)}/>
 				<Route exact path="/search" render={ () => (
 					<SearchBooks mybooks={this.state.mybooks} updateBookShelf={this.updateBookShelf} />

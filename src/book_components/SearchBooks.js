@@ -17,7 +17,7 @@ class SearchBooks extends Component {
 			return; 
 		}		
 		
-		BooksAPI.search(query, 20).then( (queried_books) => {				
+		BooksAPI.search(query, 20).then( (queried_books) => {
 				console.log('queried_books', queried_books);
 				const mybooks = this.props.mybooks;
 				if( queried_books.length > 0) {
@@ -55,7 +55,7 @@ class SearchBooks extends Component {
 		const mybooks = this.props.mybooks;
 		
 		return (
-			<div className="search-books">				
+			<div className="search-books">
 				
 				<div className="search-books-bar">
 					<Link className="close-search" to="/">Home</Link>
@@ -97,7 +97,7 @@ class SearchBooks extends Component {
 				</div>
 				
 				
-			</div>			
+			</div>
 		);
   }
 	

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class WantToRead extends Component {
 
   render() {
-		const books = this.props.books || [];		
+		const books = this.props.books || [];
 		const updateBookShelf = this.props.updateBookShelf;
 		
 		//console.log('Props', this.props);
