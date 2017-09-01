@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
 
-class AlreadyRead extends Component {
+class BookShelf extends Component {
 
   render() {
 		const books = this.props.books || [];
 		const updateBookShelf = this.props.updateBookShelf;
+		const bookshelfTitle = this.props.bookshelfTitle;
+		const bookshelfClass = this.props.bookshelfClass;
 		
 		//console.log('Props', this.props);
 		return (
-			<div className="already-read-books">
-				<h2 className="bookshelf-title">Already Read Books:</h2>
+			<div className={bookshelfClass}>
+				<h2 className="bookshelf-title">{bookshelfTitle}</h2>
 				<ul className="bookshelf-books books-grid">
-				{books.map( (book) => (
+				{books && books.length > 0 && books.map( (book) => (
 					<li className="bookshelf-book book" key={book.id}>
 						<div className="book-image">
-							<img src={book.imageLinks.thumbnail} />
+							<img src={book.imageLinks.thumbnail} alt={book.title} />
 							<div className="book-shelf-changer">
-								<select onChange={(e)=>updateBookShelf(book, e.target.value)} value={book.shelf}>
+								<select onChange={(e)=> {updateBookShelf(book, e.target.value); book.shelf = e.target.value; }} value={book.shelf}>
 									<option value="" disabled="disabled">Move to...</option>
 									<option value="currentlyReading">Currently Reading</option>
 									<option value="wantToRead">Want to Read</option>
@@ -26,7 +28,7 @@ class AlreadyRead extends Component {
 							</div>
 						</div>
 						<div className="book-title">{book.title}</div>
-						<div className="book-authors">{book.authors.join(', ')}</div>
+						<div className="book-authors">{book.authors && book.authors.join(', ')}</div>
 						{/*<div className="book-shelf">{book.shelf}</div>*/}
 					</li>
 				))}
@@ -37,4 +39,4 @@ class AlreadyRead extends Component {
 	
 }
 
-export default AlreadyRead;
+export default BookShelf;

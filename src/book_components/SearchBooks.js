@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import * as BooksAPI from '../utils/BooksAPI';
+import BookShelf from './sub_components/BookShelf';
 
 class SearchBooks extends Component {
 	state = {
@@ -10,7 +11,7 @@ class SearchBooks extends Component {
 	
 	searchBooks = (query) => {
 		this.setState({ query: query }); // do not trim string for now, since it would remove spaces in searches like 'Artificial Intelligence'	
-		if(query.length == 0) { //start searching after starts typing 3 chars
+		if(query.length === 0) { //start searching after starts typing 3 chars
 			this.setState({ found_books: [] });
 		}		
 		if(query.length < 3) { //start searching after starts typing 3 chars
@@ -18,11 +19,11 @@ class SearchBooks extends Component {
 		}		
 		
 		BooksAPI.search(query, 20).then( (queried_books) => {
-				console.log('queried_books', queried_books);
+				//console.log('queried_books', queried_books);
 				const mybooks = this.props.mybooks;
 				if( queried_books.length > 0) {
 					queried_books.map(function(query_book){
-						console.log('query_book', query_book);
+						//console.log('query_book', query_book);
 						var findbook = mybooks.find(findbook => findbook.id === query_book.id);
 						//var findbook = mybooks.find(findbook => findbook.title === "Satire TV");
 						//var findbook = mybooks.find(function(findbook){ console.log(findbook); return findbook.title === "Satire TV"; }); console.log('222',findbook);
@@ -35,7 +36,7 @@ class SearchBooks extends Component {
 							return query_book;
 						}
 					});
-					console.log('queried_books, after adding shelf prop',queried_books);
+					//console.log('queried_books, after adding shelf prop',queried_books);
 				}
 				
 				this.setState({ found_books: queried_books });
@@ -44,15 +45,10 @@ class SearchBooks extends Component {
 		
 	};
 	
-	matchValue =  () => {
-		console.log('matchValue',this.props.mybooks);
-		return 'none';
-	};
-	
   render() {
 		//const searchLibraryMain = this.props.searchLibraryMain;
 		const updateBookShelf = this.props.updateBookShelf;
-		const mybooks = this.props.mybooks;
+		//const mybooks = this.props.mybooks;
 		
 		return (
 			<div className="search-books">
@@ -66,36 +62,12 @@ class SearchBooks extends Component {
 							onChange={ (event) => this.searchBooks(event.target.value)}/>
 					</div>
 				</div>
-				
-				<div className="search-books-results">
-					<h2 className="bookshelf-title">Found Books:</h2>
-					<div>
-						{ this.state.found_books == undefined || (this.state.found_book && this.state.found_book.length==0) || (this.state.found_books.error && this.state.found_books.error=="empty query") ? 'No books found yet.' : ''}
+				<div className="search-status">
+						{ this.state.found_books === undefined || (this.state.found_books && this.state.found_books.length===0) || (this.state.found_books.error && this.state.found_books.error==="empty query") ? 'No books found yet.' : ''}
 						{this.state.query.length < 3 ? ' Please type at least 3 characters to start search.' : ''}
-					</div>
-					<ul className="bookshelf-books books-grid">
-					{this.state.found_books.length > 0 && this.state.found_books.map( (book) => (
-						<li className="bookshelf-book book" key={book.id}>
-							<div className="book-image">
-								<img src={book.imageLinks.thumbnail} />
-								<div className="book-shelf-changer">
-									<select onChange={(e)=> {updateBookShelf(book, e.target.value); book.shelf = e.target.value; }} value={book.shelf}>
-										<option value="" disabled="disabled">Move to...</option>
-										<option value="currentlyReading">Currently Reading</option>
-										<option value="wantToRead">Want to Read</option>
-										<option value="read">Read</option>
-										<option value="none">None</option>
-									</select>
-								</div>
-							</div>
-							<div className="book-title">{book.title}</div>
-							<div className="book-authors">{book.authors && book.authors.join(', ')}</div>
-							{/*<div className="book-shelf">{book.shelf}</div>*/}
-						</li>
-					))}
-					</ul>
 				</div>
-				
+
+				<BookShelf books={this.state.found_books}      type="found"             bookshelfTitle="Found Books"      bookshelfClass="search-books-results"      updateBookShelf={updateBookShelf}/>
 				
 			</div>
 		);

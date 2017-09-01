@@ -9,56 +9,42 @@ import * as BooksAPI from './utils/BooksAPI';
 
 class App extends Component {
 	state = {
-		/*
-		booksCurrentlyReading: [],
-		booksWantToRead: [],
-		booksAlreadyRead: [],
-		*/
 		mybooks: []
 	}; //will be array of book objects
 	componentDidMount() {
-		console.log('componentDidMount');
+		//console.log('componentDidMount');
 		BooksAPI.getAll().then( (books) => {
-			console.log(books);
-			console.log(books.map( (book, index, array) => {return {title: book.title, status: book.shelf};}) );
+			//console.log(books);
+			//console.log(books.map( (book, index, array) => {return {title: book.title, status: book.shelf};}) );
 			this.setState({mybooks: books});
 		});
 	}
 	
 	getBook = (id) => {
 		BooksAPI.get(id).then( (book) => {
-				console.log(book);
+				//console.log(book);
 			}
 		);
 	};
 	
 	updateBookShelf = (book, shelf) => {
-		console.log('updateBookShelf:',book);
-		console.log('updateBookShelf', shelf );
+		//console.log('updateBookShelf:',book);
+		//console.log('updateBookShelf', shelf );
 
 		BooksAPI.update(book, shelf).then( () => {
-				console.log(`book added to ${shelf}`);
+				//console.log(`book added to ${shelf}`);
 				
 				BooksAPI.getAll().then( (books) => {
-					console.log(books);
-					console.log(books.map( (book, index, array) => {return {title: book.title, status: book.shelf};}) );
+					//console.log(books);
+					//console.log(books.map( (book, index, array) => {return {title: book.title, status: book.shelf};}) );
 					this.setState({mybooks: books});
+					book.shelf = shelf;
+				}).catch(function(error) {
+				  //console.log('There has been a problem with your fetch operation: ' + error.message);
 				});
 			}
 		);
 	};
-	
-	/*
-	searchLibrary = (query) => {
-		console.log('App.js searchLibraryMain:'+ query);
-		BooksAPI.search(query, 20).then( (queried_books) => {
-				console.log(queried_books);
-				return queried_books;
-			}
-		);
-	};
-	searchLibrary={this.searchLibrary} 
-	*/
 	
   render() {
     return (
@@ -75,8 +61,3 @@ class App extends Component {
 }
 
 export default App;
-/*
-						booksCurrentlyReading={this.state.booksCurrentlyReading}
-						booksWantToRead      ={this.state.booksWantToRead}
-						booksAlreadyRead     ={this.state.booksAlreadyRead} 
-*/

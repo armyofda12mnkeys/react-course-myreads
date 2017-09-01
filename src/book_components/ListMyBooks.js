@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import CurrentlyReading from './sub_components/CurrentlyReading';
-import WantToRead from './sub_components/WantToRead';
-import AlreadyRead from './sub_components/AlreadyRead';
+import BookShelf from './sub_components/BookShelf';
 import SearchFooter from './sub_components/SearchFooter';
 
 class ListMyBooks extends Component {	
 
   render() {
 		const updateBookShelf = this.props.updateBookShelf;
-		console.log('props:', this.props);
-		console.log('state:', this.state);
+		//console.log('props:', this.props);
+		//console.log('state:', this.state);
 		
 		const books = this.props.mybooks || [];		
 		const currently_reading_books = books.filter( (book) => { return book.shelf === 'currentlyReading' } );
@@ -20,9 +18,9 @@ class ListMyBooks extends Component {
 			<div className="bookshelf">
 				<div className="list-books-title"><h1>My Reads</h1></div>
 				<div className="list-books-content">
-					<CurrentlyReading books={currently_reading_books} updateBookShelf={updateBookShelf}/>
-					<WantToRead       books={want_to_read_books}      updateBookShelf={updateBookShelf}/>
-					<AlreadyRead      books={already_read_books}      updateBookShelf={updateBookShelf}/>
+					<BookShelf books={currently_reading_books} type="currentlyReading" bookshelfTitle="Currently Reading Books" bookshelfClass="currently-reading-books" updateBookShelf={updateBookShelf}/>
+					<BookShelf books={want_to_read_books}      type="wantToRead"       bookshelfTitle="Want to Read Books"      bookshelfClass="want-to-read-books"      updateBookShelf={updateBookShelf}/>
+					<BookShelf books={already_read_books}      type="read"             bookshelfTitle="Already Read Books"      bookshelfClass="already-read-books"      updateBookShelf={updateBookShelf}/>
 					<SearchFooter />
 				</div>
 			</div>
