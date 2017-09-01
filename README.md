@@ -28,9 +28,8 @@ To get started developing right away:
 	├── ListMyBooks.js
 	├── SearchBooks.js
 	└── sub_components
-	    ├── WantToRead.js       MOVE TO 1 JS FILE - reused by above ListMyBooks and SearchBooks!
-		├── CurrentlyReading.js MOVE TO 1 JS FILE
-		├── AlreadyRead.js      MOVE TO 1 JS FILE
+	    ├── BookShelf.js - reusable component for book-shelves
+		├── Book.js - reusable component for books on the book-shelves
 		└── SearchFooter.js
     ├── icons # Helpful images for your app. Use at your discretion.
     │   ├── add.svg
